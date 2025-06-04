@@ -64,7 +64,7 @@ function showInfo(dados) {
   document.querySelector('.cidade').textContent = dados.nome;
   document.querySelector('.condicao').textContent = dados.descricao;
   document.querySelector('.vento').textContent = `Vento: ${dados.vento} km/h`;
-  document.querySelector('.icon-temp').src = `https://openweathermap.org/img/wn/${dados.icone}@2x.png`;
+  document.querySelector('.icon-temp').src = `images/${dados.icone}.png`; 
   document.querySelector('.umidade').textContent = `Umidade: ${dados.umidade}%`;
   document.querySelector('.sensacao').textContent = `Sensação: ${dados.sensacao}°C`;
 
@@ -87,7 +87,7 @@ function atualizarFundoPorClima(descricao) {
   let imagem = '';
   let classe = 'default';
 
-  if (descricao.includes('nublado') || descricao.includes('clouds')) {
+  if (descricao.includes('nublado') || descricao.includes('clouds') || descricao.includes("encoberto") || descricao.includes("nuvens dispersas") && !descricao.includes("algumas nuvens")) {
     imagem = "url('images/backcloud.png')";
     classe = 'nublado';
   } else if (descricao.includes('chuva') || descricao.includes('rain') || descricao.includes('drizzle')) {
@@ -99,8 +99,6 @@ function atualizarFundoPorClima(descricao) {
   } else if (descricao.includes('sol') || descricao.includes('ensolarado') || descricao.includes('céu limpo') || descricao.includes('clear')) {
     imagem = "url('images/backsun.png')";
     classe = 'solardo';
-  } else {
-    imagem = "url('images/backsun.png')";
   }
 
   body.style.backgroundImage = imagem;
@@ -148,7 +146,7 @@ async function buscarAlertas(lat, lon) {
 
 // 📆 Previsão dos próximos 7 dias
 async function buscarPrevisao(lat, lon) {
-  const url = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=current,minutely,hourly,alerts&appid=4bb6c4a43bf26eef27e849816a12c88b&units=metric&lang=pt_br`;
+  const url = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=current,minutely,hourly,alerts&appid=${apiKey}&units=metric&lang=pt_br`;
 
   try {
     const res = await fetch(url);
@@ -162,7 +160,6 @@ async function buscarPrevisao(lat, lon) {
     exibirPrevisaoDias(data);
   } catch (erro) {
     console.error("Erro ao buscar previsão:", erro);
-    
   }
 }
 
@@ -171,26 +168,30 @@ function exibirPrevisaoDias(data) {
   const diasSemana = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'];
   const container = document.getElementById("previsao-dias");
 
-  
+  if (!container) return;
+  if (!data.daily) {
+    console.warn("Previsão diária não encontrada.");
+    return;
+  }
 
-  for (let i = 1; i <= 5; i++) { // Exibe os próximos 5 dias (sem o dia atual)
-    const diaObj = data.daily[i];
-    if (!diaObj) continue;
+  container.innerHTML = "";
 
-    const dataDia = new Date(diaObj.dt * 1000);
-    const diaSemana = diasSemana[dataDia.getDay()];
-    const temp = Math.round(diaObj.temp.day);
-    const icone = diaObj.weather[0].icon;
-    const descricao = diaObj.weather[0].description;
+  for (let i = 1; i <= 5; i++) {
+    const dia = data.daily[i];
+    const dataDia = new Date(dia.dt * 1000);
+    const nomeDia = diasSemana[dataDia.getDay()];
+    const temp = Math.round(dia.temp.day);
+    const icone = dia.weather[0].icon;
 
-    const card = `
-      <div class="dia">
-        <div class="dia-nome">${diaSemana}</div>
-        <img src="https://openweathermap.org/img/wn/${icone}@2x.png" alt="${descricao}">
-        <div class="temp">${temp}°C</div>
-      </div>
+    const card = document.createElement("div");
+    card.className = "dia";
+    card.innerHTML = `
+      <p>${nomeDia}</p>
+      <img src="images/${icone}.png" alt="${dia.weather[0].description}">
+      <p>${temp}°C</p>
     `;
-   
+
+    container.appendChild(card);
   }
 }
 
@@ -222,4 +223,12 @@ function carregarHistorico() {
 function aplicarModoAutomatico() {
   const hora = new Date().getHours();
   document.body.classList.toggle('modo-escuro', hora < 6 || hora >= 18);
+}
+
+
+const isNoite = dados.icone.endsWith('n');
+if (dados.icone.endsWith('n')) {
+  // aplicar fundo de noite
+  imagem = "url('images/backmoon.png')";
+  classe = 'noite';
 }
