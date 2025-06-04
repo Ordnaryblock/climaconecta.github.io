@@ -16,71 +16,97 @@
       <ul style="display: flex; list-style: none; gap: 20px; margin: 0; padding: 0;">
         <li><a href="#">Previsão do Tempo</a></li>
         <li><a href="#">Campo e Cidade</a></li>
-        <li><a href="#">Dicas e Curiosidades</a></li>
         <li><a href="#">Contato</a></li>
       </ul>
     </nav>
   </header>
   
-     <form class="busca">
-      <input type="text" id="searchInput" placeholder="Digite o nome da cidade" />
-      <button type="submit">Buscar</button>
-     </form>
-    
+  <form class="busca">
+    <input type="text" id="searchInput" placeholder="Digite o nome da cidade" />
+    <button type="submit">Buscar</button>
+  </form>
 
-    <div class="aviso"></div>
+  <div class="aviso"></div>
 
-    <section class="cards">
-      <div class="card clima-atual">
-        <p class="titulo-cards">Clima Atual</p>
-        <div class="infoC">
-          <span class="cidade titulo">Cidade</span>
+  <section class="cards">
+    <div class="card clima-atual">
+      <p class="titulo-cards">Clima Atual</p>
+      <div class="infoC">
+        <span class="cidade titulo">Cidade</span>
+      </div>
+      <img class="icone icon-temp" src="images/01d.png" alt="Ícone do tempo" />
+      <div class="infoT">
+        <span class="temp temperatura">--°C</span>
+      </div>
+      <div class="infoD">
+        <p class="condicao tempInfo">• Céu --</p>
+      </div>
+      <div class="info">
+        <span class="vento ventoInfo">• Vento: -- km/h</span>
+      </div>
+      <div class="infoS">
+        <span class="sensacao">• Sensação: --°C</span>
+      </div>
+      <div class="infoU">
+        <span class="umidade">• Umidade: --%</span>
+      </div>
+    </div>
+
+    <div class="previsao-container">
+      <h2>Próximos Dias</h2>
+      <div class="previsao-scroll" id="previsao-dias">
+          <div class="dia">
+          <p>Dom</p>
+          <img src="https://openweathermap.org/img/wn/10d.png" alt="Chuva">
+          <p>24°C</p>
         </div>
-        <img class="icone icon-temp" src="images/01d.png" alt="Ícone do tempo" />
-        <div class="infoT">
-          <span class="temp temperatura">--°C</span>
+        <div class="dia">
+          <p>Seg</p>
+          <img src="https://openweathermap.org/img/wn/01d.png" alt="Sol">
+          <p>29°C</p>
         </div>
-        <div class="infoD">
-          <p class="condicao tempInfo">Condições</p>
+        <div class="dia">
+          <p>Terça</p>
+          <img src="https://openweathermap.org/img/wn/04d.png" alt="Nuvens">
+          <p>26°C</p>
         </div>
-        <div class="info">
-          <span class="vento ventoInfo">• Vento: -- km/h</span>
+        <div class="dia">
+          <p>Qua</p>
+          <img src="https://openweathermap.org/img/wn/10d.png" alt="Chuva">
+          <p>24°C</p>
         </div>
-        <div class="infoS">
-          <span class="">• Sensação: --°C</span>
+        <div class="dia">
+          <p>Qui</p>
+          <img src="https://openweathermap.org/img/wn/01d.png" alt="Sol">
+          <p>29°C</p>
         </div>
-        <div class="infoU">
-          <span class="">• Umidade: --%</span>
-          </div>
-           <div class="infoE">
-          <span class="">• Céu --</span>
         </div>
       </div>
+    </div>
 
-      <div class="card previsao">
-        <p class="titulo-card">Próximos Dias</p>
-        <ul>
-          <li><strong>Ter:</strong> 18°/24°</li>
-          <li><strong>Qua:</strong> 19°/25°</li>
-          <li><strong>Qui:</strong> 18°/24°</li>
-        </ul>
-        <button>Ver para o campo e cidade</button>
-      </div>
+    <div class="card alerta" id="alerta">
+      <p class="titulo-card">Alerta do Dia</p>
+      <p>Carregando alertas...</p>
+    </div>
+  </section>
 
-      <div class="card alerta">
-        <p class="titulo-card">Alerta do Dia</p>
-        <span>Alerta de tempestade para áreas rurais</span>
-        <button>Veja como se preparar</button>
-      </div>
-    </section>
+  <form class="buscad">
+    <h1>Conexão Cidade e Campo</h1>
+  </form>
+  <section class="info-blocos">
+    <div class="bloco">Como Previsão do tempo conecta cidade com campo?<br>
+      <small>
+        A previsão do tempo é uma ferramenta essencial que une o campo e a cidade de maneira prática e invisível no dia a dia. Para quem vive no campo, especialmente agricultores, conhecer as condições climáticas é vital para o plantio, colheita e cuidado com os animais. Já nas cidades, ela influencia diretamente atividades como o transporte, eventos ao ar livre, vestuário e até mesmo a saúde da população.
 
-    <section class="info-blocos">
-      <div class="bloco">Pome<br><small>• Temp. mínima e máxima<br>• Umidade, vento<br>• Radar de chuva</small></div>
-    </section>
-  </main>
+Ao disponibilizar essas informações em um site acessível tanto para moradores urbanos quanto rurais, promovemos uma ponte de conexão entre esses dois mundos. A previsão do tempo permite que todos se preparem, se adaptem e convivam melhor com a natureza, mostrando que, mesmo com estilos de vida diferentes, todos dependem do mesmo céu.
+
+Festejar essa conexão é valorizar o papel que a tecnologia tem em aproximar realidades distintas, reforçando que o clima, além de natural, é um elo social e econômico entre o campo e a cidade.
+      </small>
+    </div>
+  </section>
 
   <footer>
-    <p>© 2025 ClimaConecta</p>
+    <p>© 2025 SergioKinseler</p>
   </footer>
 
   <script src="script.js"></script>
