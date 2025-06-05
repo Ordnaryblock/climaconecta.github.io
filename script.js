@@ -83,6 +83,7 @@ function atualizarFundoPorClima(descricao, icone) {
   const body = document.body;
   const busca = document.querySelector('.busca');
   const header = document.querySelector('header');
+  const footer = document.querySelector('footer');
   
   descricao = descricao.toLowerCase();
 
@@ -113,7 +114,6 @@ function atualizarFundoPorClima(descricao, icone) {
   } else if (descricao.includes('algumasN') || descricao.includes('02n')) {
     imagem = "url('images/backcloudmoon.png')";
     classe = 'algumasN';
-  
   } else if (descricao.includes('neve') || descricao.includes('13d') || descricao.includes('13n')) {
     imagem = "url('images/backneve.png')";
     classe = 'neve';
@@ -127,10 +127,12 @@ function atualizarFundoPorClima(descricao, icone) {
   classes.forEach(c => {
     busca.classList.remove(`busca-${c}`);
     header.classList.remove(`header-${c}`);
+    footer.classList.remove(`footer-${c}`);
   });
 
   busca.classList.add(`busca-${classe}`);
   header.classList.add(`header-${classe}`);
+  footer.classList.add(`footer-${classe}`);
 }
 
 
