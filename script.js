@@ -69,6 +69,7 @@ function showInfo(dados) {
   document.querySelector('.sensacao').textContent = `Sensação: ${dados.sensacao}°C`;
 
   atualizarFundoPorClima(dados.descricao);
+  atualizarFundoPorClima(dados.icone);
   showWarning("");
 }
 
@@ -78,34 +79,51 @@ function showWarning(msg) {
 }
 
 // Fundo dinâmico conforme clima
-function atualizarFundoPorClima(descricao) {
+function atualizarFundoPorClima(descricao, icone) {
   const body = document.body;
   const busca = document.querySelector('.busca');
   const header = document.querySelector('header');
+  
   descricao = descricao.toLowerCase();
 
   let imagem = '';
   let classe = 'default';
 
-  if (descricao.includes('nublado') || descricao.includes('clouds') || descricao.includes("encoberto") || descricao.includes("nuvens dispersas") && !descricao.includes("algumas nuvens")) {
-    imagem = "url('images/backcloud.png')";
-    classe = 'nublado';
-  } else if (descricao.includes('chuva') || descricao.includes('rain') || descricao.includes('drizzle')) {
-    imagem = "url('images/backrain.png')";
-    classe = 'chuva';
-  } else if (descricao.includes('noite') || descricao.includes('night')) {
+  if (icone && icone.endsWith('n') || descricao.includes('01n')) {
     imagem = "url('images/backmoon.png')";
     classe = 'noite';
-  } else if (descricao.includes('sol') || descricao.includes('ensolarado') || descricao.includes('céu limpo') || descricao.includes('clear')) {
+  } else if (descricao.includes('nublado') || descricao.includes('03d') || descricao.includes("03n") || descricao.includes("04n") || descricao.includes("04d")) {
+    imagem = "url('images/backcloud.png')";
+    classe = 'nublado';
+  } else if (descricao.includes('chuva') || descricao.includes('09d') || descricao.includes('09n') || descricao.includes('10d') || descricao.includes('10n')) {
+    imagem = "url('images/backrain.png')";
+    classe = 'chuva';
+  } else if (descricao.includes('raio') || descricao.includes('11d') || descricao.includes('11n')) {
+    imagem = "url('images/backrainthunder.png')";
+    classe = 'raio';
+  } else if (descricao.includes('sol') || descricao.includes('01d')) {
     imagem = "url('images/backsun.png')";
     classe = 'solardo';
+  } else if (descricao.includes('nevoeiro') || descricao.includes('50d') || descricao.includes('50n')) {
+    imagem = "url('images/backnevoa.png')";
+    classe = 'nevoeiro';
+  } else if (descricao.includes('algumas') || descricao.includes('02d')) {
+    imagem = "url('images/backcloudsun.png')";
+    classe = 'algumas';
+  } else if (descricao.includes('algumasN') || descricao.includes('02n')) {
+    imagem = "url('images/backcloudmoon.png')";
+    classe = 'algumasN';
+  
+  } else if (descricao.includes('neve') || descricao.includes('13d') || descricao.includes('13n')) {
+    imagem = "url('images/backneve.png')";
+    classe = 'neve';
   }
 
   body.style.backgroundImage = imagem;
   body.style.backgroundSize = 'cover';
   body.style.backgroundRepeat = 'no-repeat';
 
-  const classes = ['solardo', 'nublado', 'noite', 'chuva', 'default'];
+  const classes = ['solardo', 'nublado', 'noite', 'chuva', 'default', 'algumas', 'algumasN', 'Neve', 'algumas', 'nevoeiro', 'raio'];
   classes.forEach(c => {
     busca.classList.remove(`busca-${c}`);
     header.classList.remove(`header-${c}`);
@@ -114,6 +132,7 @@ function atualizarFundoPorClima(descricao) {
   busca.classList.add(`busca-${classe}`);
   header.classList.add(`header-${classe}`);
 }
+
 
 // 🔔 Alertas meteorológicos
 async function buscarAlertas(lat, lon) {
