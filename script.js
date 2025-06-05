@@ -64,12 +64,11 @@ function showInfo(dados) {
   document.querySelector('.cidade').textContent = dados.nome;
   document.querySelector('.condicao').textContent = dados.descricao;
   document.querySelector('.vento').textContent = `Vento: ${dados.vento} km/h`;
-  document.querySelector('.icon-temp').src = `images/${dados.icone}.png`; 
+  document.querySelector('.icon-temp').src = `images/${dados.icone}.png`;
   document.querySelector('.umidade').textContent = `Umidade: ${dados.umidade}%`;
   document.querySelector('.sensacao').textContent = `Sensação: ${dados.sensacao}°C`;
 
-  atualizarFundoPorClima(dados.descricao);
-  atualizarFundoPorClima(dados.icone);
+  atualizarFundoPorClima(dados.descricao, dados.icone);
   showWarning("");
 }
 
@@ -90,40 +89,55 @@ function atualizarFundoPorClima(descricao, icone) {
   let imagem = '';
   let classe = 'default';
 
-  if (icone && icone.endsWith('n') || descricao.includes('01n')) {
-    imagem = "url('images/backmoon.png')";
-    classe = 'noite';
-  } else if (descricao.includes('nublado') || descricao.includes('03d') || descricao.includes("03n") || descricao.includes("04n") || descricao.includes("04d")) {
-    imagem = "url('images/backcloud.png')";
-    classe = 'nublado';
-  } else if (descricao.includes('chuva') || descricao.includes('09d') || descricao.includes('09n') || descricao.includes('10d') || descricao.includes('10n')) {
-    imagem = "url('images/backrain.png')";
-    classe = 'chuva';
-  } else if (descricao.includes('raio') || descricao.includes('11d') || descricao.includes('11n')) {
-    imagem = "url('images/backrainthunder.png')";
-    classe = 'raio';
-  } else if (descricao.includes('sol') || descricao.includes('01d')) {
-    imagem = "url('images/backsun.png')";
-    classe = 'solardo';
-  } else if (descricao.includes('nevoeiro') || descricao.includes('50d') || descricao.includes('50n')) {
-    imagem = "url('images/backnevoa.png')";
-    classe = 'nevoeiro';
-  } else if (descricao.includes('algumas') || descricao.includes('02d')) {
-    imagem = "url('images/backcloudsun.png')";
-    classe = 'algumas';
-  } else if (descricao.includes('algumasN') || descricao.includes('02n')) {
-    imagem = "url('images/backcloudmoon.png')";
-    classe = 'algumasN';
-  } else if (descricao.includes('neve') || descricao.includes('13d') || descricao.includes('13n')) {
-    imagem = "url('images/backneve.png')";
-    classe = 'neve';
+  if (icone) {
+    if (icone.endsWith('n')) {
+      imagem = "url('images/backmoon.png')";
+      classe = 'noite';
+    } else if (icone === '01d') {
+      imagem = "url('images/backsun.png')";
+      classe = 'solardo';
+    } else if (icone === '02d') {
+      imagem = "url('images/backcloudsun.png')";
+      classe = 'algumas';
+    } else if (icone === '02n') {
+      imagem = "url('images/backcloudmoon.png')";
+      classe = 'algumasN';
+    } else if (['03d','03n','04d','04n'].includes(icone)) {
+      imagem = "url('images/backcloud.png')";
+      classe = 'nublado';
+    } else if (['09d','09n','10d','10n'].includes(icone)) {
+      imagem = "url('images/backrain.png')";
+      classe = 'chuva';
+    } else if (['11d','11n'].includes(icone)) {
+      imagem = "url('images/backrainthunder.png')";
+      classe = 'raio';
+    } else if (['13d','13n'].includes(icone)) {
+      imagem = "url('images/backneve.png')";
+      classe = 'neve';
+    } else if (['50d','50n'].includes(icone)) {
+      imagem = "url('images/backnevoa.png')";
+      classe = 'nevoeiro';
+    }
+  } else {
+    // fallback por descrição se icone não estiver definido
+    if (descricao.includes('sol')) {
+      imagem = "url('images/backsun.png')";
+      classe = 'solardo';
+    } else if (descricao.includes('nublado')) {
+      imagem = "url('images/backcloud.png')";
+      classe = 'nublado';
+    } else if (descricao.includes('chuva')) {
+      imagem = "url('images/backrain.png')";
+      classe = 'chuva';
+    }
+    // etc... adicione conforme desejar
   }
 
   body.style.backgroundImage = imagem;
   body.style.backgroundSize = 'cover';
   body.style.backgroundRepeat = 'no-repeat';
 
-  const classes = ['solardo', 'nublado', 'noite', 'chuva', 'default', 'algumas', 'algumasN', 'Neve', 'algumas', 'nevoeiro', 'raio'];
+  const classes = ['solardo', 'nublado', 'noite', 'chuva', 'default', 'algumas', 'algumasN', 'neve', 'nevoeiro', 'raio'];
   classes.forEach(c => {
     busca.classList.remove(`busca-${c}`);
     header.classList.remove(`header-${c}`);
@@ -167,16 +181,12 @@ async function buscarAlertas(lat, lon) {
 
 // 📆 Previsão dos próximos 7 dias
 async function buscarPrevisao(lat, lon) {
-  const url = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=current,minutely,hourly,alerts&appid=${apiKey}&units=metric&lang=pt_br`;
+  const url = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric&lang=pt_br`;
 
   try {
     const res = await fetch(url);
     if (!res.ok) throw new Error("Erro HTTP: " + res.status);
     const data = await res.json();
-
-    if (!data.daily || data.daily.length === 0) {
-      throw new Error("Nenhuma previsão disponível");
-    }
 
     exibirPrevisaoDias(data);
   } catch (erro) {
@@ -184,36 +194,37 @@ async function buscarPrevisao(lat, lon) {
   }
 }
 
-// 📋 Exibir os próximos dias no card
 function exibirPrevisaoDias(data) {
   const diasSemana = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'];
   const container = document.getElementById("previsao-dias");
-
-  if (!container) return;
-  if (!data.daily) {
-    console.warn("Previsão diária não encontrada.");
-    return;
-  }
-
   container.innerHTML = "";
 
-  for (let i = 1; i <= 5; i++) {
-    const dia = data.daily[i];
-    const dataDia = new Date(dia.dt * 1000);
-    const nomeDia = diasSemana[dataDia.getDay()];
-    const temp = Math.round(dia.temp.day);
-    const icone = dia.weather[0].icon;
+  const diasAdicionados = new Set();
 
-    const card = document.createElement("div");
-    card.className = "dia";
-    card.innerHTML = `
-      <p>${nomeDia}</p>
-      <img src="images/${icone}.png" alt="${dia.weather[0].description}">
-      <p>${temp}°C</p>
-    `;
+  data.list.forEach((item) => {
+    const dataHora = new Date(item.dt * 1000);
+    const hora = dataHora.getHours();
 
-    container.appendChild(card);
-  }
+    if (hora === 12) {
+      const nomeDia = diasSemana[dataHora.getDay()];
+      const temp = Math.round(item.main.temp);
+      const icone = item.weather[0].icon;
+
+      if (!diasAdicionados.has(nomeDia)) {
+        diasAdicionados.add(nomeDia);
+
+        const card = document.createElement("div");
+        card.className = "dia";
+        card.innerHTML = `
+          <p>${nomeDia}</p>
+          <img src="images/${icone}.png" alt="${item.weather[0].description}">
+          <p>${temp}°C</p>
+        `;
+
+        container.appendChild(card);
+      }
+    }
+  });
 }
 
 // 💾 Histórico de buscas
@@ -244,12 +255,4 @@ function carregarHistorico() {
 function aplicarModoAutomatico() {
   const hora = new Date().getHours();
   document.body.classList.toggle('modo-escuro', hora < 6 || hora >= 18);
-}
-
-
-const isNoite = dados.icone.endsWith('n');
-if (dados.icone.endsWith('n')) {
-  // aplicar fundo de noite
-  imagem = "url('images/backmoon.png')";
-  classe = 'noite';
 }
