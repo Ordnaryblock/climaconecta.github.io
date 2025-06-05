@@ -366,6 +366,10 @@ ul li a {
   background-color: #d8b803; /* Amarelo solarado */
 }
 
+.footer-solardo {
+  background-color: #d8b803; /* Amarelo solarado */
+}
+
 .busca-nublado {
   background-color: #4F4F4F;
 }
@@ -374,12 +378,20 @@ ul li a {
   background-color: #363636;
 }
 
+.footer-nublado {
+  background-color: #363636; /* Amarelo solarado */
+}
+
 .busca-noite {
-  background-color: #2c3e50;
+  background-color: #6826be;
 }
 
 .header-noite {
-  background-color: #2c3e50; /* Azul escuro noite */
+  background-color: #4a1491; /* Azul escuro noite */
+}
+
+.footer-noite {
+  background-color: #4a1491; /* Amarelo solarado */
 }
 
 .busca-chuva {
@@ -388,6 +400,10 @@ ul li a {
 
 .header-chuva {
   background-color: #0000CD; /* Azul claro chuva */
+}
+
+.footer-chuva {
+  background-color: #0000CD; /* Amarelo solarado */
 }
 
 .busca-default {
@@ -406,3 +422,42 @@ ul li a {
   background-color: #7a791d; 
 }
 
+.footer-algumas {
+  background-color: #7a791d; /* Amarelo solarado */
+}
+
+.busca-algumasN {
+  background-color: #4b2f71;
+}
+
+.header-algumasN {
+  background-color: #54357d; /* Azul escuro noite */
+}
+
+.footer-algumasN {
+  background-color: #54357d; /* Amarelo solarado */
+}
+
+.busca-nevoeiro {
+  background-color: #363636;
+}
+
+.header-nevoeiro {
+  background-color: #1f1f1f; /* Azul escuro noite */
+}
+
+.footer-nevoeiro {
+  background-color: #1f1f1f; /* Amarelo solarado */
+}
+
+.busca-raio {
+  background-color: #2c3e50;
+}
+
+.header-raio {
+  background-color: #2c3e50; /* Azul escuro noite */
+}
+
+.footer-raio {
+  background-color: #2c3e50; /* Amarelo solarado */
+}
