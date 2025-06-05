@@ -5,6 +5,7 @@
 }
 
 body {
+   height: 100%;
   font-family: Arial, sans-serif;
   background-color: #f0f4f8;
   color: #333;
@@ -258,7 +259,7 @@ background: #ffffff;
 
 footer {
   text-align: center;
-  padding: 20px;
+  padding: 10px 0;
   background-color: #0751da;
   color: #ffffff;
   font-size: 14px;
@@ -395,5 +396,13 @@ ul li a {
 
 .header-default {
   background-color: #2a52e1; 
+}
+
+.busca-algumas {
+  background-color: #7a724b;
+}
+
+.header-algumas {
+  background-color: #7a791d; 
 }
 
