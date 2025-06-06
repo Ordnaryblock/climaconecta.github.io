@@ -48,6 +48,8 @@ async function buscarCidade(cidade) {
       lon
     });
 
+  buscarAlertas(lat, lon, data.weather[0].description.toLowerCase(), data.weather[0].icon);
+
     buscarAlertas(lat, lon);
     buscarPrevisao(lat, lon);
     aplicarModoAutomatico();
@@ -88,56 +90,41 @@ function atualizarFundoPorClima(descricao, icone) {
 
   let imagem = '';
   let classe = 'default';
+ if (icone.includes('01n')) {
+  imagem = "url('images/backmoon.png')";
+  classe = 'noite';
+} else if (icone.includes('01d')) {
+  imagem = "url('images/backsun.png')";
+  classe = 'solardo';
+} else if (icone.includes('03d') || icone.includes("03n") || icone.includes("04n") || icone.includes("04d") || descricao.includes('nublado')) {
+  imagem = "url('images/backcloud.png')";
+  classe = 'nublado';
+} else if (icone.includes('09d') || icone.includes('09n') || icone.includes('10d') || icone.includes('10n') || descricao.includes('chuva')) {
+  imagem = "url('images/backrain.png')";
+  classe = 'chuva';
+} else if (icone.includes('11d') || icone.includes('11n') || descricao.includes('raio')) {
+  imagem = "url('images/backrainthunder.png')";
+  classe = 'raio';
+} else if (icone.includes('02d')) {
+  imagem = "url('images/backcloudsun.png')";
+  classe = 'algumas';
+} else if (icone.includes('02n')) {
+  imagem = "url('images/backcloudmoon.png')";
+  classe = 'algumasN';
+} else if (icone.includes('13d') || icone.includes('13n') || descricao.includes('neve')) {
+  imagem = "url('images/backneve.png')";
+  classe = 'neve';
+} else if (icone.includes('50d') || icone.includes('50n') || descricao.includes('nevoeiro')) {
+  imagem = "url('images/backnevoa.png')";
+  classe = 'nevoeiro';
+}
 
-  if (icone) {
-    if (icone.endsWith('n')) {
-      imagem = "url('images/backmoon.png')";
-      classe = 'noite';
-    } else if (icone === '01d') {
-      imagem = "url('images/backsun.png')";
-      classe = 'solardo';
-    } else if (icone === '02d') {
-      imagem = "url('images/backcloudsun.png')";
-      classe = 'algumas';
-    } else if (icone === '02n') {
-      imagem = "url('images/backcloudmoon.png')";
-      classe = 'algumasN';
-    } else if (['03d','03n','04d','04n'].includes(icone)) {
-      imagem = "url('images/backcloud.png')";
-      classe = 'nublado';
-    } else if (['09d','09n','10d','10n'].includes(icone)) {
-      imagem = "url('images/backrain.png')";
-      classe = 'chuva';
-    } else if (['11d','11n'].includes(icone)) {
-      imagem = "url('images/backrainthunder.png')";
-      classe = 'raio';
-    } else if (['13d','13n'].includes(icone)) {
-      imagem = "url('images/backneve.png')";
-      classe = 'neve';
-    } else if (['50d','50n'].includes(icone)) {
-      imagem = "url('images/backnevoa.png')";
-      classe = 'nevoeiro';
-    }
-  } else {
-    // fallback por descrição se icone não estiver definido
-    if (descricao.includes('sol')) {
-      imagem = "url('images/backsun.png')";
-      classe = 'solardo';
-    } else if (descricao.includes('nublado')) {
-      imagem = "url('images/backcloud.png')";
-      classe = 'nublado';
-    } else if (descricao.includes('chuva')) {
-      imagem = "url('images/backrain.png')";
-      classe = 'chuva';
-    }
-    // etc... adicione conforme desejar
-  }
 
-  body.style.backgroundImage = imagem;
+   body.style.backgroundImage = imagem;
   body.style.backgroundSize = 'cover';
   body.style.backgroundRepeat = 'no-repeat';
 
-  const classes = ['solardo', 'nublado', 'noite', 'chuva', 'default', 'algumas', 'algumasN', 'neve', 'nevoeiro', 'raio'];
+  const classes = ['solardo', 'nublado', 'noite', 'chuva', 'default', 'algumas', 'algumasN', 'Neve', 'algumas', 'nevoeiro', 'raio'];
   classes.forEach(c => {
     busca.classList.remove(`busca-${c}`);
     header.classList.remove(`header-${c}`);
@@ -151,33 +138,63 @@ function atualizarFundoPorClima(descricao, icone) {
 
 
 // 🔔 Alertas meteorológicos
-async function buscarAlertas(lat, lon) {
-  const url = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=${apiKey}&lang=pt_br`;
+async function buscarAlertas(lat, lon, climaDescricao, climaIcone) {
+  const blocoAlerta = document.querySelector('#alerta');
+  blocoAlerta.innerHTML = `
+    <p class="titulo-card">Alerta do Dia</p>
+    <p>Carregando alertas...</p>
+  `;
 
   try {
-    const res = await fetch(url);
-    const data = await res.json();
-    const alertaEl = document.querySelector('#alerta');
+    const resposta = await fetch("https://apiprevmet3.inmet.gov.br/avisos/ativos");
+    if (!resposta.ok) throw new Error("Erro ao buscar dados do INMET");
 
-    if (data.alerts && data.alerts.length > 0) {
-      const alerta = data.alerts[0];
-      alertaEl.innerHTML = `
-        <h3>Alerta do Dia</h3>
-        <p><strong>${alerta.event}</strong></p>
-        <p>${alerta.description}</p>
-        <a href="#" class="btn-alerta">Veja como se preparar</a>
-      `;
-      alertaEl.style.backgroundColor = "#FF8C00";
+    const dados = await resposta.json();
+    const alertas = Object.values(dados);
+
+    // Verifica se o clima atual tem chuva
+    const climaChuvoso = climaIcone.includes('09') || climaIcone.includes('10') || climaIcone.includes('11') || climaDescricao.includes('chuva') || climaDescricao.includes('tempestade');
+
+    // Monta a mensagem base dos alertas INMET
+    let mensagemAlerta = "";
+    if (alertas.length === 0) {
+      mensagemAlerta = "Nenhum alerta ativo para hoje.";
     } else {
-      alertaEl.innerHTML = `<h3>Alerta do Dia</h3><p>Sem alertas para hoje.</p>`;
-      alertaEl.style.backgroundColor = "#F8F8FF";
+      mensagemAlerta = alertas[0].mensagem || "Alerta emitido, mas sem detalhes.";
     }
 
-  } catch (error) {
-    console.error("Erro ao buscar alertas:", error);
-    document.querySelector('#alerta').innerHTML = `<h3>Alerta do Dia</h3><p>Não foi possível obter os alertas.</p>`;
+    // Mensagem extra de chuva, se houver
+    let mensagemChuva = "";
+    if (climaChuvoso) {
+      mensagemChuva = "⚠️ Está chovendo, cuidado!";
+      blocoAlerta.style.backgroundColor = "yellow";
+      blocoAlerta.style.color = "black";
+    } else {
+      blocoAlerta.style.backgroundColor = "";
+      blocoAlerta.style.color = "";
+    }
+
+    // Coloca as duas mensagens juntas, separadas por linha
+    blocoAlerta.innerHTML = `
+      <p class="titulo-card">Alerta do Dia</p>
+      <p>${mensagemAlerta}</p>
+      ${mensagemChuva ? `<p>${mensagemChuva}</p>` : ""}
+    `;
+  } catch (erro) {
+    blocoAlerta.innerHTML = `
+      <p class="titulo-card">Alerta do Dia</p>
+      <p>Não foi possível obter os alertas.</p>
+    `;
+    blocoAlerta.style.backgroundColor = "";
+    blocoAlerta.style.color = "";
+    console.error("Erro ao buscar alertas:", erro);
   }
 }
+
+
+
+
+
 
 // 📆 Previsão dos próximos 7 dias
 async function buscarPrevisao(lat, lon) {
