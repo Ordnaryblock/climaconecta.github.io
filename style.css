@@ -451,13 +451,25 @@ ul li a {
 }
 
 .busca-raio {
-  background-color: #2c3e50;
+  background-color: #01253e;
 }
 
 .header-raio {
-  background-color: #2c3e50; /* Azul escuro noite */
+  background-color: #2b2724; /* Azul escuro noite */
 }
 
 .footer-raio {
-  background-color: #2c3e50; /* Amarelo solarado */
+  background-color: #2b2724; /* Amarelo solarado */
+}
+
+.busca-raio {
+  background-color: #19496b;
+}
+
+.header-neve {
+  background-color: #1a90bb; /* Azul escuro noite */
+}
+
+.footer-neve {
+  background-color: #1a90bb; /* Amarelo solarado */
 }
