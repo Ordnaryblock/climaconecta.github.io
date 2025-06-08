@@ -5,13 +5,13 @@
 ## 🔗 Acesse o projeto online
 
 🌐 [https://ordnaryblock.github.io/climaconecta.github.io/](https://ordnaryblock.github.io/climaconecta.github.io/)  
-🚀 [Versão alternativa hospedada na Netlify](https://seu-netlify.netlify.app) _(se aplicar)_
+🚀 [Versão alternativa hospedada na Netlify](https://climaconecta.netlify.app/)
 
 ---
 
 ## 🧠 Objetivo
 
-O **ClimaConecta** foi desenvolvido como parte da proposta do *Agrinho*, unindo tecnologia e consciência climática. A plataforma oferece:
+O **ClimaConecta** foi desenvolvido como parte da proposta do *Agrinho*, com tema "Festejando a conexão campo cidade" objetivo do projeto é mostrar como unindo tecnologia e consciência climática nas cidades ajudam os campos nas colheitas um bom exemplo mostra epocas que acontecerão chuvas. A plataforma oferece:
 
 - Previsão do tempo atual
 - Previsão para os próximos 7 dias
