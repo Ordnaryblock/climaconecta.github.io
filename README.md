@@ -54,7 +54,7 @@ O **ClimaConecta** foi desenvolvido como parte da proposta do *Agrinho*, unindo 
 
 - Todos os textos do site são 100% autorais.
 - Nenhuma fonte externa foi utilizada para os textos explicativos.
-- As imagens de fundo e ícones são baseadas em materiais próprios / [se for o caso] adaptados de fontes livres, e editadas usando [Paint].
+- As imagens de fundo e ícones são baseadas em materiais próprios adaptados de fontes livres, e editadas usando [Paint].
 
 ---
 
