@@ -284,8 +284,9 @@ function carregarHistorico() {
   });
 }
 
-// 🌙 Modo escuro automático por horário
+// 🌙 Modo escuro automático por horárioo
 function aplicarModoAutomatico() {
   const hora = new Date().getHours();
   document.body.classList.toggle('modo-escuro', hora < 6 || hora >= 18);
 }
+
