@@ -50,6 +50,14 @@ O **ClimaConecta** foi desenvolvido como parte da proposta do *Agrinho*, unindo 
 
 ---
 
+## Originalidade
+
+- Todos os textos do site são 100% autorais.
+- Nenhuma fonte externa foi utilizada para os textos explicativos.
+- As imagens de fundo e ícones são baseadas em materiais próprios / [se for o caso] adaptados de fontes livres, e editadas usando [Paint].
+
+---
+
 ## 🧪 Como rodar localmente
 
 ```bash
@@ -57,3 +65,7 @@ O **ClimaConecta** foi desenvolvido como parte da proposta do *Agrinho*, unindo 
 git clone https://github.com/Ordnaryblock/climaconecta.github.io.git
 
 # Abra o index.html com seu navegador
+
+
+
+
