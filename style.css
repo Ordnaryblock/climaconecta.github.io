@@ -219,7 +219,7 @@ background: #ffffff;
 .titulo-card {
   font-weight: bold;
   font-size: 20px;
-  margin-left: 35px;
+  margin-left: 70px;
   justify-content: center;
   align-items: center; 
   transform: translateX(-60px);
@@ -472,4 +472,12 @@ ul li a {
 
 .footer-neve {
   background-color: #1a90bb; /* Amarelo solarado */
+}
+
+.card-avisos-chuva {
+  background-color: #ffea00; /* Azul escuro noite */
+}
+
+.card-avisos-raio {
+  background-color: #ff7300; /* Amarelo solarado */
 }
