@@ -290,26 +290,43 @@ function aplicarModoAutomatico() {
   document.body.classList.toggle('modo-escuro', hora < 6 || hora >= 18);
 }
 
-// mapa meterologico 
+// 🌎 Inicialização total ao carregar a página
+document.addEventListener('DOMContentLoaded', () => {
+  buscarCidade("Colombo, BR");
 
-// 🗺️ Mapa Meteorológico com OpenWeather + Leaflet
-document.addEventListener("DOMContentLoaded", () => {
-  const mapaDiv = document.querySelector("#mapa");
-  if (mapaDiv) {
-    const map = L.map("mapa").setView([-23.5, -46.6], 5); // Centro aproximado do Brasil
+  // Verifica se o elemento #mapa existe antes de tentar criar o mapa
+  const mapaElement = document.getElementById('mapa');
+  if (mapaElement) {
+    const map = L.map('mapa').setView([-23.5, -46.6], 5);
 
-    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-      attribution: "&copy; OpenStreetMap contributors"
+    // Camada base (mapa de ruas)
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; OpenStreetMap contributors'
     }).addTo(map);
 
-    const openWeatherKey = "4bb6c4a43bf26eef27e849816a12c88b";
+    // Camadas meteorológicas da OpenWeather
+    const nuvens = L.tileLayer(`https://tile.openweathermap.org/map/clouds_new/{z}/{x}/{y}.png?appid=${apiKey}`, {
+      attribution: '&copy; <a href="https://openweathermap.org/">OpenWeatherMap</a>'
+    });
 
-    // Camada de nuvens — pode mudar para precipitation_new, pressure_new, etc.
-    L.tileLayer(
-      `https://tile.openweathermap.org/map/clouds_new/{z}/{x}/{y}.png?appid=${openWeatherKey}`,
-      {
-        attribution: '&copy; <a href="https://openweathermap.org/">OpenWeatherMap</a>'
-      }
-    ).addTo(map);
+    const temperatura = L.tileLayer(`https://tile.openweathermap.org/map/temp_new/{z}/{x}/{y}.png?appid=${apiKey}`, {
+      attribution: '&copy; <a href="https://openweathermap.org/">OpenWeatherMap</a>'
+    });
+
+    const precipitacao = L.tileLayer(`https://tile.openweathermap.org/map/precipitation_new/{z}/{x}/{y}.png?appid=${apiKey}`, {
+      attribution: '&copy; <a href="https://openweathermap.org/">OpenWeatherMap</a>'
+    });
+
+    // Adiciona camada padrão
+    nuvens.addTo(map);
+
+    // Controle de camadas
+    const overlays = {
+      "☁️ Nuvens": nuvens,
+      "🌡️ Temperatura": temperatura,
+      "🌧️ Precipitação": precipitacao
+    };
+
+    L.control.layers(null, overlays, { collapsed: false }).addTo(map);
   }
 });
