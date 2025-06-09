@@ -5,11 +5,13 @@
 }
 
 body {
-   height: 100%;
-  font-family: Arial, sans-serif;
-  background-color: #f0f4f8;
-  color: #333;
+  min-height: 100vh;
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed; /* mantém a imagem fixa e evita esticar */
 }
+
 
 header {
   background-color: #2a52e1;
@@ -18,23 +20,37 @@ header {
   text-align: left;
 }
 
-header h1 {
-  color: #ffffff;
-}
-
-header a {
-  color: white;
-  text-decoration: none;
-}
-
-nav ul {
+.navbar {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 30px;
+}
+
+.logo-titulo h1 {
+  color: white;
+  margin-right: 20px;
+}
+
+.menu-esquerda ul {
+  display: flex;
   list-style: none;
   gap: 30px;
-  font-weight: bold;
-  font-size: 16px;
+  margin: 0;
+  padding: 0;
 }
+
+.menu-esquerda ul li a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.tv-logo img {
+  height: 50px;
+  width: auto;
+}
+
 
 main.hero {
   max-width: 1200px;
@@ -483,16 +499,22 @@ ul li a {
 }
 
 .clima-conecta {
-  padding: 20px;
-  background-color: #fff;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  padding: 40px;
+  background-image: url('images/fundo.png'); /* Substitua pelo caminho correto */
+  background-size: cover;              /* Faz a imagem cobrir sem distorcer */
+  background-position: center center;  /* Centraliza corretamente */
+  background-repeat: no-repeat;
+  background-attachment: scroll;       /* Garante que role junto com a página */
+  color: white;
+  position: relative;
 }
+
 
 .clima-conecta h2 {
   text-align: center;
   font-size: 28px;
   margin-bottom: 30px;
-  color: #1f3b68;
+  color: #0062ff;
 }
 
 .clima-blocos {
@@ -527,24 +549,24 @@ ul li a {
 
 .bloco-info h3 {
   font-size: 20px;
-  color: #003366;
+  color: #0080ff;
   margin-bottom: 5px;
 }
 
 .bloco-info p {
   font-size: 16px;
-  color: #333;
+  color: #ffffff;
 }
 
 .bloco-infod h3 {
   font-size: 20px;
-  color: #003366;
+  color: #0080ff;
   margin-bottom: 5px;
 }
 
 .bloco-infod p {
   font-size: 16px;
-  color: #333;
+  color: #fffefe;
 }
 
 .bloco-infor {
@@ -562,7 +584,7 @@ ul li a {
 }
 
 .mapa-climatico {
-  max-width: 900px;
+  max-width: 400px;
   margin: 50px auto;
   padding: 20px;
   background: #fff;
@@ -572,12 +594,12 @@ ul li a {
 .mapa-climatico h2 {
   text-align: center;
   margin-bottom: 20px;
-  color: #1f3b68;
+  color: #0062ff;
 }
 
 #mapa {
   width: 100%;
-  height: 400px;
+  height: 50px;
   border-radius: 8px;
   border: 1px solid #ccc;
   margin-top: 10px;
