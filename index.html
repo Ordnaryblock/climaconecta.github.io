@@ -6,34 +6,32 @@
   <title>ClimaConecta</title>
   <link rel="stylesheet" href="style.css" />
   <link rel="icon" href="images/logo.png" type="image/png">
-  <!-- Leaflet CSS e JS para mapa meteorológico -->
-<link
-  rel="stylesheet"
-  href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-  integrity="sha256-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44c="
-  crossorigin=""
-/>
-<script
-  src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-  integrity="sha256-o9N1j8MkUA2v5U+dDsrw6rYXj1bNL1gPkmU9Jkz8+3k="
-  crossorigin=""
-></script>
 
+    <!-- Leaflet CSS e JS (sem integrity) -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 </head>
 <body>
    <div class="page-container"></div>
-  <header>
-    <nav style="display: flex; justify-content: space-between; align-items: center; padding: 10px 20px;">
-      <div>
-        <h1>𝐂𝐥𝐢𝐦𝐚𝐂𝐨𝐧𝐞𝐜𝐭𝐚</h1>
-      </div> 
-      <ul style="display: flex; list-style: none; gap: 20px; margin: 0; padding: 0;">
+<header>
+  <nav class="navbar">
+    <div class="logo-titulo">
+      <h1>𝐂𝐥𝐢𝐦𝐚𝐂𝐨𝐧𝐞𝐜𝐭𝐚</h1>
+    </div>
+
+    <div class="menu-esquerda">
+      <ul>
         <li><a href="#">Previsão do Tempo</a></li>
         <li><a href="#">Campo e Cidade</a></li>
-        <li><a href="#">Contato</a></li>
       </ul>
-    </nav>
-  </header>
+    </div>
+
+    <div class="tv-logo">
+      <img src="images/tv.png" alt="TV" />
+    </div>
+  </nav>
+</header>
+
   <form class="busca">
     <input type="text" id="searchInput" placeholder="Digite o nome da cidade" />
     <button type="submit">Buscar</button>
@@ -102,6 +100,8 @@
 </div>
   </section>
 
+
+
  <section class="clima-conecta">
   <h2>Como o Clima Conecta Cidade e Campo</h2>
   <div class="clima-blocos">
@@ -141,6 +141,9 @@
     </div>
   </div>
 </section>
+
+
+
 
   <footer>
     <p>© 2025 SergioKinseler</p>
