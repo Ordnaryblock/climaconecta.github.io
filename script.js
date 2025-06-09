@@ -122,6 +122,19 @@ function atualizarFundoPorClima(descricao, icone) {
     classe = 'nevoeiro';
   }
 
+// Trocar TV quando estiver chovendo à noite
+const tvLogo = document.querySelector('.tv-logo');
+const isChuvaNoite = icone.includes('09n') || icone.includes('10n');
+
+if (tvLogo) {
+  if (isChuvaNoite) {
+    tvLogo.classList.add('tv-ativo');
+  } else {
+    tvLogo.classList.remove('tv-ativo');
+  }
+}
+
+
  // Após aplicar as classes, personalize o texto de aviso para chuva e raio
 const textoAviso = cardAvisos.querySelector('.infoD');
 if (classe === 'chuva') {
@@ -204,12 +217,6 @@ async function buscarAlertas() {
     blocoAlerta.style.backgroundColor = '';
   }
 }
-
-
-
-
-
-
 
 
 // 📆 Previsão dos próximos 7 dias
@@ -330,3 +337,18 @@ document.addEventListener('DOMContentLoaded', () => {
     L.control.layers(null, overlays, { collapsed: false }).addTo(map);
   }
 });
+
+const elementosAnimar = document.querySelectorAll('.fade-element');
+
+const observer = new IntersectionObserver((entradas) => {
+  entradas.forEach(entrada => {
+    if (entrada.isIntersecting) {
+      entrada.target.classList.add('fade-in');
+      observer.unobserve(entrada.target); // só anima uma vez
+    }
+  });
+}, {
+  threshold: 0.2 // 20% do elemento visível já ativa
+});
+
+elementosAnimar.forEach(el => observer.observe(el));
