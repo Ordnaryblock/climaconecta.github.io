@@ -284,9 +284,24 @@ function carregarHistorico() {
   });
 }
 
-// 🌙 Modo escuro automático por horárioo
+// 🌙 Modo escuro automático por horário
 function aplicarModoAutomatico() {
   const hora = new Date().getHours();
   document.body.classList.toggle('modo-escuro', hora < 6 || hora >= 18);
 }
 
+// mapa meterologico 
+
+const map = L.map('mapa').setView([-23.5, -46.6], 5); // Centro aproximado do Brasil
+
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  attribution: '&copy; OpenStreetMap contributors'
+}).addTo(map);
+
+// Substitua pela sua API key da OpenWeather
+const openWeatherKey = "4bb6c4a43bf26eef27e849816a12c88b";
+
+// Camada de nuvens (outros tipos disponíveis: clouds_new, precipitation_new, pressure_new, wind_new, temp_new)
+const layer = L.tileLayer(`https://tile.openweathermap.org/map/clouds_new/{z}/{x}/{y}.png?appid=${openWeatherKey}`, {
+  attribution: '&copy; <a href="https://openweathermap.org/">OpenWeatherMap</a>'
+}).addTo(map);
