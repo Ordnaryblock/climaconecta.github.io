@@ -292,16 +292,24 @@ function aplicarModoAutomatico() {
 
 // mapa meterologico 
 
-const map = L.map('mapa').setView([-23.5, -46.6], 5); // Centro aproximado do Brasil
+// 🗺️ Mapa Meteorológico com OpenWeather + Leaflet
+document.addEventListener("DOMContentLoaded", () => {
+  const mapaDiv = document.querySelector("#mapa");
+  if (mapaDiv) {
+    const map = L.map("mapa").setView([-23.5, -46.6], 5); // Centro aproximado do Brasil
 
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-  attribution: '&copy; OpenStreetMap contributors'
-}).addTo(map);
+    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      attribution: "&copy; OpenStreetMap contributors"
+    }).addTo(map);
 
-// Substitua pela sua API key da OpenWeather
-const openWeatherKey = "4bb6c4a43bf26eef27e849816a12c88b";
+    const openWeatherKey = "4bb6c4a43bf26eef27e849816a12c88b";
 
-// Camada de nuvens (outros tipos disponíveis: clouds_new, precipitation_new, pressure_new, wind_new, temp_new)
-const layer = L.tileLayer(`https://tile.openweathermap.org/map/clouds_new/{z}/{x}/{y}.png?appid=${openWeatherKey}`, {
-  attribution: '&copy; <a href="https://openweathermap.org/">OpenWeatherMap</a>'
-}).addTo(map);
+    // Camada de nuvens — pode mudar para precipitation_new, pressure_new, etc.
+    L.tileLayer(
+      `https://tile.openweathermap.org/map/clouds_new/{z}/{x}/{y}.png?appid=${openWeatherKey}`,
+      {
+        attribution: '&copy; <a href="https://openweathermap.org/">OpenWeatherMap</a>'
+      }
+    ).addTo(map);
+  }
+});
