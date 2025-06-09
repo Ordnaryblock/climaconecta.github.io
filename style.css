@@ -481,3 +481,96 @@ ul li a {
 .card-avisos-raio {
   background-color: #ff7300; /* Amarelo solarado */
 }
+
+.clima-conecta {
+  padding: 20px;
+  background-color: #fff;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.clima-conecta h2 {
+  text-align: center;
+  font-size: 28px;
+  margin-bottom: 30px;
+  color: #1f3b68;
+}
+
+.clima-blocos {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.bloco-info {
+  display: flex;
+  align-items: flex-start;
+  gap: 40px;
+   padding-left: 100px;
+}
+
+.bloco-infod {
+  display: flex;
+  align-items: flex-start;
+  gap: 200px;
+  padding-left: 100px;
+}
+
+.bloco-info img {
+  width: 300px;
+  height: 300px;
+}
+
+.bloco-infod img {
+  width: 300px;
+  height: 300px;
+}
+
+.bloco-info h3 {
+  font-size: 20px;
+  color: #003366;
+  margin-bottom: 5px;
+}
+
+.bloco-info p {
+  font-size: 16px;
+  color: #333;
+}
+
+.bloco-infod h3 {
+  font-size: 20px;
+  color: #003366;
+  margin-bottom: 5px;
+}
+
+.bloco-infod p {
+  font-size: 16px;
+  color: #333;
+}
+
+.bloco-infor {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+  padding-left: 100px;
+}
+
+.bloco-infor h2 {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+  padding-left: 100px;
+}
+
+.mapa-climatico {
+  max-width: 900px;
+  margin: 50px auto;
+  padding: 20px;
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.mapa-climatico h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #1f3b68;
+}
