@@ -21,13 +21,14 @@
 
     <div class="menu-esquerda">
       <ul>
-        <li><a href="#">Previsão do Tempo</a></li>
-        <li><a href="#">Campo e Cidade</a></li>
+        <li><a href="#previsao">Previsão do Tempo</a></li>
+        <li><a href="#campo">Campo e Cidade</a></li>
       </ul>
     </div>
 
     <div class="tv-logo">
-      <img src="images/tv.png" alt="TV" />
+      <img src="images/tv.png" alt="TV normal" class="normal">
+      <img src="images/tv2.gif" alt="TV animada" class="tv-ativo">
     </div>
   </nav>
 </header>
@@ -39,7 +40,7 @@
 
   <div class="aviso"></div>
 
-  <section class="cards">
+  <section class="cards" id="previsao">
     <div class="card clima-atual">
       <p class="titulo-cards">Clima Atual</p>
       <div class="infoC">
@@ -102,41 +103,41 @@
 
 
 
- <section class="clima-conecta">
-  <h2>Como o Clima Conecta Cidade e Campo</h2>
+ <section id="campo" class="clima-conecta">
+  <h2 class="fade-element">Como o Clima Conecta Cidade e Campo</h2>
   <div class="clima-blocos">
     <div class="bloco-info">
       <img src="images/campo.png" alt="Campo">
       <div>
-        <h3>Função da Previsão do Tempo no Campo</h3>
-        <p>A previsão ajuda no planejamento da colheita, cuidados com os animais e proteção contra eventos climáticos extremos.</p>
+        <h3 class="fade-element">Função da Previsão do Tempo no Campo</h3>
+        <p class="fade-element">A previsão ajuda no planejamento da colheita, cuidados com os animais e proteção contra eventos climáticos extremos.</p>
       </div>
     </div>
 
     <div class="bloco-infod">
       <div>
-        <h3>Função da Previsão do Tempo na Cidade</h3>
-        <p>Ajuda moradores a se prepararem para o dia a dia, transporte, saúde e eventos ao ar livre.</p>
+        <h3 class="fade-element">Função da Previsão do Tempo na Cidade</h3>
+        <p class="fade-element">Ajuda moradores a se prepararem para o dia a dia, transporte, saúde e eventos ao ar livre.</p>
       </div>
       <img src="images/cidade.png" alt="Cidade">
     </div>
 
     <div class="bloco-info">
       <section class="mapa-climatico">
-  <h2>Mapa Meteorológico em Tempo Real</h2>
+  <h2 class="fade-element">Mapa Meteorológico em Tempo Real</h2>
   <div id="mapa" style="height: 400px;"></div>
 </section>
 
       <div>
-        <h3>Tecnologia: Elo entre Esses Mundos</h3>
-        <p>Aplicativos e sites meteorológicos aproximam campo e cidade, democratizando o acesso à informação climática.</p>
+        <h3 class="fade-element">Tecnologia: Elo entre Esses Mundos</h3>
+        <p class="fade-element">Aplicativos e sites meteorológicos aproximam campo e cidade, democratizando o acesso à informação climática.</p>
       </div>
     </div>
 
     <div class="bloco-infor">
       <div>
-        <h2>Referências</h2>
-        <p>Fontes: OpenWeather API, Imagens autorais, Conteúdo original com base no tema Agrinho 2024.</p>
+        <h2 class="fade-element">Referências</h2>
+        <p class="fade-element">Fontes: OpenWeather API, Imagens autorais, Conteúdo original com base no tema Agrinho 2024.</p>
       </div>
     </div>
   </div>
