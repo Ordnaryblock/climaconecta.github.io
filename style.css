@@ -10,21 +10,25 @@ body {
   background-position: center center;
   background-repeat: no-repeat;
   background-attachment: fixed; /* mantém a imagem fixa e evita esticar */
-}
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  font-size: 16px;
+  font-weight: normal;
+  line-height: 1.6;
+  color: #333;
 
+}
 
 header {
   background-color: #2a52e1;
-  padding: 15px 0;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-  text-align: left;
+  box-shadow: 0 2px 5px rgba(1, 1, 10, 1);
+  text-align: right;
 }
 
 .navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px 30px;
+  padding: 0px 10px;
 }
 
 .logo-titulo h1 {
@@ -38,6 +42,7 @@ header {
   gap: 30px;
   margin: 0;
   padding: 0;
+  padding-left: 750px;
 }
 
 .menu-esquerda ul li a {
@@ -47,9 +52,43 @@ header {
 }
 
 .tv-logo img {
-  height: 50px;
+  height: 70px;
   width: auto;
+  padding: 0px;
+   margin: 0px;
 }
+
+.tv-logo {
+  position: relative;
+  width: 70px;
+  height: 70px;
+}
+
+.tv-logo img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 70px;
+  width: auto;
+  transition: opacity 1s ease;
+  z-index: 1;
+}
+
+/* Oculta a TV animada inicialmente */
+.tv-logo .tv-ativo {
+  opacity: 0;
+  z-index: 2;
+}
+
+/* Quando ativado, mostra a TV animada e esconde a normal */
+.tv-logo.chuva-noite .tv-ativo {
+  opacity: 1;
+}
+
+.tv-logo.chuva-noite .normal {
+  opacity: 0;
+}
+
 
 
 main.hero {
@@ -312,7 +351,8 @@ footer {
 }
 
 .busca {
-  background-color: #381eca;
+  background-color: #381eca; 
+  background: linear-gradient(to bottom, #2a52e1, #381eca);
   display: flex;
   justify-content: center;
   padding: 10px;
@@ -376,18 +416,20 @@ ul li a {
 
 .busca-solardo {
   background-color: #b48b05;
+  background: linear-gradient(to bottom, #d8b803, #816300)
 }
 
 .header-solardo {
-  background-color: #d8b803; /* Amarelo solarado */
+  background-color: #d8b803; 
 }
 
 .footer-solardo {
-  background-color: #d8b803; /* Amarelo solarado */
+  background-color: #d8b803;
 }
 
 .busca-nublado {
   background-color: #4F4F4F;
+  background: linear-gradient(to bottom, #363636, #787878)
 }
 
 .header-nublado {
@@ -395,35 +437,38 @@ ul li a {
 }
 
 .footer-nublado {
-  background-color: #363636; /* Amarelo solarado */
+  background-color: #363636; 
 }
 
 .busca-noite {
   background-color: #6826be;
+  background: linear-gradient(to bottom, #4a1491, #884fd2)
 }
 
 .header-noite {
-  background-color: #4a1491; /* Azul escuro noite */
+  background-color: #4a1491; 
 }
 
 .footer-noite {
-  background-color: #4a1491; /* Amarelo solarado */
+  background-color: #4a1491; 
 }
 
 .busca-chuva {
   background-color: #000080;
+  background: linear-gradient(to bottom, #0000CD, #000080)
 }
 
 .header-chuva {
-  background-color: #0000CD; /* Azul claro chuva */
+  background-color: #0000CD; 
 }
 
 .footer-chuva {
-  background-color: #0000CD; /* Amarelo solarado */
+  background-color: #0000CD; 
 }
 
 .busca-default {
   background-color: #381eca;
+  background: linear-gradient(to bottom, #2a52e1, #381eca)
 }
 
 .header-default {
@@ -432,6 +477,7 @@ ul li a {
 
 .busca-algumas {
   background-color: #7a724b;
+  background: linear-gradient(to bottom, #7a791d, #7a724b)
 }
 
 .header-algumas {
@@ -439,63 +485,67 @@ ul li a {
 }
 
 .footer-algumas {
-  background-color: #7a791d; /* Amarelo solarado */
+  background-color: #7a791d; 
 }
 
 .busca-algumasN {
   background-color: #4b2f71;
+  background: linear-gradient(to bottom, #54357d, #805bb3)
 }
 
 .header-algumasN {
-  background-color: #54357d; /* Azul escuro noite */
+  background-color: #54357d; 
 }
 
 .footer-algumasN {
-  background-color: #54357d; /* Amarelo solarado */
+  background-color: #54357d; 
 }
 
 .busca-nevoeiro {
   background-color: #363636;
+  background: linear-gradient(to bottom, #1f1f1f, #414141)
 }
 
 .header-nevoeiro {
-  background-color: #1f1f1f; /* Azul escuro noite */
+  background-color: #1f1f1f; 
 }
 
 .footer-nevoeiro {
-  background-color: #1f1f1f; /* Amarelo solarado */
+  background-color: #1f1f1f; 
 }
 
 .busca-raio {
   background-color: #01253e;
+  background: linear-gradient(to bottom, #2b2724, #01253e)
 }
 
 .header-raio {
-  background-color: #2b2724; /* Azul escuro noite */
+  background-color: #2b2724; 
 }
 
 .footer-raio {
-  background-color: #2b2724; /* Amarelo solarado */
+  background-color: #2b2724; 
 }
 
-.busca-raio {
+.busca-neve {
   background-color: #19496b;
+  background: linear-gradient(to bottom, #1a90bb, #19496b)
 }
 
 .header-neve {
-  background-color: #1a90bb; /* Azul escuro noite */
+  background-color: #1a90bb; 
 }
 
 .footer-neve {
-  background-color: #1a90bb; /* Amarelo solarado */
+  background-color: #1a90bb; 
 }
 
 .card-avisos-chuva {
-  background-color: #ffea00; /* Azul escuro noite */
+  background-color: #ffea00; 
 }
 
 .card-avisos-raio {
-  background-color: #ff7300; /* Amarelo solarado */
+  background-color: #ff7300; 
 }
 
 .clima-conecta {
@@ -509,12 +559,14 @@ ul li a {
   position: relative;
 }
 
-
 .clima-conecta h2 {
   text-align: center;
   font-size: 28px;
   margin-bottom: 30px;
+  padding-left:  60px;
+  padding-right:  60px;
   color: #0062ff;
+  box-shadow: 0 5px 8px rgba(9,9,9,9.9);
 }
 
 .clima-blocos {
@@ -605,4 +657,53 @@ ul li a {
   margin-top: 10px;
 }
 
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 
+.clima-conecta h2,
+.clima-conecta h3,
+.clima-conecta p {
+  opacity: 0;
+  animation: fadeUp 1s ease forwards;
+}
+
+.clima-conecta h2 {
+  animation-delay: 0.2s;
+}
+
+.clima-conecta h3 {
+  animation-delay: 0.4s;
+}
+
+.clima-conecta p {
+  animation-delay: 0.6s;
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-element {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.fade-in {
+  animation: fadeUp 0.8s ease forwards;
+}
