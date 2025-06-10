@@ -348,7 +348,27 @@ const observer = new IntersectionObserver((entradas) => {
     }
   });
 }, {
-  threshold: 0.2 // 20% do elemento visível já ativa.
+  threshold: 0.02 // 20% do elemento visível já ativa
 });
 
 elementosAnimar.forEach(el => observer.observe(el));
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const blocos = document.querySelectorAll('clima-conecta');
+
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+  if (entry.isIntersecting) {
+    entry.target.classList.add('show');
+    observer.unobserve(entry.target); // opcional: remove o observador depois
+  }
+});
+
+    }, {
+      threshold: 0.2 // ativa quando 20% do elemento estiver visível
+    });
+
+    blocos.forEach(bloco => {
+      observer.observe(bloco);
+    });
+  });
