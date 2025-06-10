@@ -348,7 +348,7 @@ const observer = new IntersectionObserver((entradas) => {
     }
   });
 }, {
-  threshold: 0.2 // 20% do elemento visível já ativa
+  threshold: 0.2 // 20% do elemento visível já ativa.
 });
 
 elementosAnimar.forEach(el => observer.observe(el));
