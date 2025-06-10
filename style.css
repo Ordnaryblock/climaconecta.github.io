@@ -877,3 +877,16 @@ ul li a {
   word-break: break-word;
 }
 }
+
+/* Classe para temas específicos com transição suave */
+.busca-solardo, .header-solardo, .footer-solardo, .card-avisos-solardo,
+.busca-nublado, .header-nublado, .footer-nublado, .card-avisos-nublado,
+.busca-chuva, .header-chuva, .footer-chuva, .card-avisos-chuva,
+.busca-noite, .header-noite, .footer-noite, .card-avisos-noite,
+.busca-raio, .header-raio, .footer-raio, .card-avisos-raio,
+.busca-algumas, .header-algumas, .footer-algumas, .card-avisos-algumas,
+.busca-algumasN, .header-algumasN, .footer-algumasN, .card-avisos-algumasN,
+.busca-neve, .header-neve, .footer-neve, .card-avisos-neve,
+.busca-nevoeiro, .header-nevoeiro, .footer-nevoeiro, .card-avisos-nevoeiro {
+  transition: all 0.5s ease-in-out;
+  }
