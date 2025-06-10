@@ -13,6 +13,7 @@ html, body {
 body {
   min-height: 100vh;
   background-size: cover;
+  transition: background-image 1s ease-in-out, background-color 1s ease-in-out;
   background-position: center center;
   background-repeat: no-repeat;
   background-attachment: fixed; /* mantém a imagem fixa e evita esticar */
@@ -629,7 +630,6 @@ ul li a {
 }
 
 .bloco-infor {
-  display: flex;
   align-items: center;
    padding-left:  110px;
   padding-right:  0px;
@@ -638,6 +638,7 @@ ul li a {
 }
 
 .bloco-infor h2 {
+   max-width: 400px;
   align-items: center;
   text-align: center;
   font-size: 28px;
@@ -718,4 +719,107 @@ ul li a {
 
 .fade-in {
   animation: fadeUp 0.8s ease forwards;
+}
+
+.bloco {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.6s ease-in-out;
+}
+
+.bloco.visivel {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.referencias {
+  list-style-type: disc;
+  padding-left: 20px;
+  margin-top: 10px;
+}
+
+.referencias li {
+  margin-bottom: 30px;
+}
+
+.referencias a {
+  color: #ffffff;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.referencias a:hover {
+  color: #8acbff;
+  text-decoration: underline;
+}
+
+/* Estilos responsivos para a seção "Como o Clima Conecta..." */
+@media (max-width: 768px) {
+  .card.card-avisos {
+    padding: 1rem;
+    font-size: 0.95rem;
+    margin: 1rem;
+  }
+
+  .clima-conecta {
+    padding: 1rem;
+  }
+
+  .clima-conecta h2 {
+    font-size: 1.4rem;
+    text-align: center;
+  }
+
+  .clima-blocos {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .bloco-info,
+  .bloco-infod,
+  .bloco-infor {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+    text-align: justify;
+  }
+
+  .bloco-info img,
+  .bloco-infod img {
+    width: 100%;
+    max-width: 300px;
+    height: auto;
+    object-fit: cover;
+    border-radius: 10px;
+  }
+
+  .bloco-info > div,
+  .bloco-infod > div {
+    width: 100%;
+  }
+
+  .bloco-infod {
+    flex-direction: column-reverse;
+  }
+
+  .mapa-climatico {
+    width: 100%;
+  }
+
+  .mapa-climatico h2 {
+    font-size: 1.3rem;
+    text-align: center;
+  }
+
+  #mapa {
+    width: 100% !important;
+    height: 300px !important;
+  }
+
+  .referencias li {
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+  }
 }
