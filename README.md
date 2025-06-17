@@ -58,6 +58,11 @@ O **ClimaConecta** foi desenvolvido como parte da proposta do *Agrinho*, com tem
 
 ---
 
+#### Licença
+Este projeto está licenciado sob a MIT License.
+
+---
+
 ## 🧪 Como rodar localmente
 
 ```bash
